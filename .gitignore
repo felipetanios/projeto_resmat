@@ -55,3 +55,12 @@ docs/_build/
 
 # PyBuilder
 target/
+
+*.zip
+*.aux
+*.bbl
+*.blg
+*.dvi
+calculus.py
+*.pdf
+log.html
