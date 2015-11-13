@@ -28,8 +28,7 @@
 \usepackage{amsfonts}
 \usepackage[T1]{fontenc}
 %\usepackage[nottoc]{tocbibind}
-\usepackage{mcode}
-
+\usepackage[framed,numbered]{mcode}
 
 \makeatletter
 \providecommand{\tabularnewline}{\\} %define
@@ -70,7 +69,65 @@ O circulo de Mohr foi muito usado no passado quando não existiam calculadoras e
 \section{Objetivo}
 Prover uma interface de fácil utilização que, dadas as tensões de cisalhamento e as tensões normais em um plano, exibe em um gráfico personalizado o círculo de Mohr. O programa pode ser executado em múltiplas plataformas (Windows, Linux) e gera um log em formato de página de internet com os dados calculados. 
 
+
 \section{Codigo}
+
+\begin{lstlisting}
+function run = run(self, tensao_x, tensao_y, tensao_cisalhamento, teta=0)
+    sin = math.sin
+    cos = math.cos
+    rad = math.radians
+    tensao_x = tensao_x
+    tensao_y = tensao_y
+    tensao_cisalhamento = tensao_cisalhamento
+    teta = teta
+    raio = 0
+    % Tensao media (tau_med)
+    tensao_principal_med = (tensao_x + tensao_y)/2.
+
+    % Tensao media de Cisalhamento (tau_med)
+    tensao_media_cisalhamento = (tensao_x - tensao_y)/2.
+
+    % Raio do Circulo (R)
+    raio = ((tensao_media_cisalhamento)**2  + 
+                 (tensao_cisalhamento)**2)**0.5
+
+    % Equilibrio das forcas nas direcao do Teta_sigma_x (sigma_x')
+    tensao_x_linha = (tensao_principal_med + 
+                           tensao_media_cisalhamento*cos(rad(2.*teta)) +
+                           tensao_cisalhamento*sin(rad(2*teta)))
+
+    % Equilibrio das forcas na direcao Teta_sigma_y (sigma_y')
+    tensao_y_linha = (tensao_principal_med - 
+                           tensao_media_cisalhamento*cos(2.*rad(teta)) -
+                           tensao_cisalhamento*sin(2.*rad(teta)))
+
+    % Equilibrio das forcas na direcao de Teta_tau (tau')
+    tensao_cisalhamento_linha = -s elf.tensao_media_cisalhamento * 
+                                        sin(2.*rad(teta))                     
+                                        tensao_cisalhamento*cos(2.*rad(teta))
+
+    % Tensao principal maxima (sigma_max)
+    tensao_principal_max = tensao_principal_med + 
+                                (((tensao_media_cisalhamento)**2) + 
+                                tensao_cisalhamento**2)**0.5
+
+    % Tensao principal minima (sigma_min)
+    tensao_principal_min = tensao_principal_med - 
+                            (((tensao_media_cisalhamento)**2) + 
+                                tensao_cisalhamento**2)**0.5
+
+    % Tensao de cisalhamento maxima (tau_max)
+    tensao_cisalhamento_max = ((tensao_media_cisalhamento**2) + 
+                                        tensao_cisalhamento**2)**0.5
+
+    % Angulo entre os eixos sem rotacao ate o sigma minimo
+    teta_p = ((math.degrees(math.atan((2.*tensao_cisalhamento) /
+                                          (tensao_x-tensao_y))))/2.)
+    % Angulo entre o eixo sem rotacao ate sigma_x'
+    teta_s = ((math.degrees(math.atan(-(tensao_x-tensao_y) /
+                                          (2.*tensao_cisalhamento))))/2.
+\end{lstlisting}
 
 
 \section{Formulas}
