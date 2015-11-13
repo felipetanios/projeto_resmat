@@ -138,10 +138,10 @@ class Gui:
                                     textvariable=cust_name4, width=15)
         self.entry4.pack(side='left')
         self.var = Tkinter.IntVar()
-        R1 = Tkinter.Radiobutton(self.frame5, text="Antihorario",
+        R1 = Tkinter.Radiobutton(self.frame5, text="Horario",
                                  variable=self.var, value=1)
         R1.pack(anchor='w')
-        R2 = Tkinter.Radiobutton(self.frame5, text="Horario",
+        R2 = Tkinter.Radiobutton(self.frame5, text="Antihorario",
                                  variable=self.var, value=2)
         R2.pack(anchor='w')
         R1.select()
@@ -173,10 +173,11 @@ class Gui:
                                  self.y1_circle, width=2,
                                  fill='#ffffff', tag='circle')
 
-        self.canvas0.create_line(0, int(ry), 1000, int(ry),
+        self.canvas0.create_line(0, int(ry), 1000,  int(ry),
                                  width=1, fill='black', tag='origin_line')
         self.canvas0.create_line(int(rx), 0, int(rx),
                                  1000, width=1, fill='black', tag='origin_line')
+
         diameter = 3
         self.rx2 = rx + diameter
         self.ry2 = ry + diameter
@@ -279,20 +280,26 @@ class Gui:
         txym = yo - self.calc.txy_plot
         tensao_cisalhamento_linha = yo + self.calc.ntxy_plot
         ntxym = yo - self.calc.ntxy_plot
+
         self.canvas0.create_line(int(rx), int(ry), int(tensao_x_linha),
                                  int(tensao_cisalhamento_linha), width=3, fill='red', tag='line2')
         self.canvas0.create_line(int(rx), int(ry), int(tensao_y_linha),
                                  int(ntxym), width=3, fill='red', tag='line2')
+
         self.canvas0.create_line(int(rx), int(ry), int(tensao_x),
                                  int(tensao_cisalhamento), width=3, fill='blue', tag='line1')
         self.canvas0.create_line(int(rx), int(ry), int(tensao_y),
                                  int(txym), width=3, fill='blue', tag='line1')
+
         self.canvas0.create_line(0, int(yo), 1000, int(yo),
                                  width=1, fill='black', tag='origin_line')
         self.canvas0.create_line(xo, 0, xo,
                                  1000, width=1, fill='black', tag='origin_line')
+
         self.canvas0.create_oval(rx-2, ry-2, self.rx2, self.ry2, width=2,
                                  fill='black', tag='center-dot')
+
+
         try:
             with open("resultados.html", 'w') as data:
                 text = []
