@@ -29,6 +29,7 @@
 \usepackage[T1]{fontenc}
 %\usepackage[nottoc]{tocbibind}
 \usepackage[framed,numbered]{mcode}
+\graphicspath{ {images/} }
 
 \makeatletter
 \providecommand{\tabularnewline}{\\} %define
@@ -66,11 +67,22 @@ Introduzido por  Christian Otto Mohr,  o Círculo de Mohr é uma forma gráfica 
 
 O circulo de Mohr foi muito usado no passado quando não existiam calculadoras eletrônicas para obter graficamente e em escala, respostas para os problemas de distribuição de Tensões, porem atualmente ele é mais usado para visualizar completamente os estados de tensão em um ponto P considerado
 
+\section{Resumo}
+
 \section{Objetivo}
 Prover uma interface de fácil utilização que, dadas as tensões de cisalhamento e as tensões normais em um plano, exibe em um gráfico personalizado o círculo de Mohr. O programa pode ser executado em múltiplas plataformas (Windows, Linux) e gera um log em formato de página de internet com os dados calculados. 
 
+\section{Metodologia e Resultados}
 
-\section{Codigo}
+\subsection{Metodologia}
+Inicialmente buscamos um maior conhecimento do circulo de Mohr. Para isso utilizamos o livro texto indicado pelo professor e outro livro também da disciplina. Buscamos tambem outras fontes da propria universidade e bem como de outras universidades renomadas nacionais e internacionais para compreender o funcionamento do circulo e de todas as tensões e angulos apresentados por ele para uma melhor apresentação dos resultados ao usuario final.
+Decidimos nomear os angulos como vimos nos slides de outros projetos de outros anos da disciplina, fornecidos pelo professor, exemplificado nas imagens abaixo:
+
+\includegraphics[scale = 0.4]{imagem1}
+
+
+
+\subsection{Codigo}
 
 \begin{lstlisting}
 function run = run(self, tensao_x, tensao_y, tensao_cisalhamento, teta=0)
@@ -181,6 +193,14 @@ function run = run(self, tensao_x, tensao_y, tensao_cisalhamento, teta=0)
 
 \begin{equation}
 	tg(2\theta_s) = - \frac{\sigma_x - \sigma_y}{2\tau_{xy}}
+\end{equation}
+
+\begin{equation}
+	B = (\sigma_{x'}, \tau_{x'y'})
+\end{equation}
+
+\begin{equation}
+	A = (\sigma_{y'}, -\tau_{x'y'})
 \end{equation}
 
 
