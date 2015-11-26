@@ -27,8 +27,10 @@
 \usepackage{indentfirst}
 \usepackage{amsfonts}
 \usepackage[T1]{fontenc}
+\usepackage{fancyref}
 %\usepackage[nottoc]{tocbibind}
 \usepackage[framed,numbered]{mcode}
+
 \graphicspath{ {images/} }
 
 \makeatletter
@@ -76,11 +78,91 @@ Prover uma interface de fácil utilização que, dadas as tensões de cisalhamen
 
 \subsection{Metodologia}
 Inicialmente buscamos um maior conhecimento do circulo de Mohr. Para isso utilizamos o livro texto indicado pelo professor e outro livro também da disciplina. Buscamos tambem outras fontes da propria universidade e bem como de outras universidades renomadas nacionais e internacionais para compreender o funcionamento do circulo e de todas as tensões e angulos apresentados por ele para uma melhor apresentação dos resultados ao usuario final.
-Decidimos nomear os angulos como vimos nos slides de outros projetos de outros anos da disciplina, fornecidos pelo professor, exemplificado nas imagens abaixo:
 
-\includegraphics[scale = 0.4]{imagem1}
+Decidimos usar as formulas citadas na  nomear os angulos como vimos nos slides de outros projetos de outros anos da disciplina, fornecidos pelo professor, possíveis de serem vistos na sub-sessão \ref{subsec: Fórmulas}.
+Estas imagens tambem podem ser encontradas no capitulo 7 do livro texto que o professor utiliza para a disciplina, além do capitulo 9 de outro livro de Resistencia dos Materiais (R. C. Hibbeler)
+
+Para idealizar nosso software buscamos exemplos já  existentes parecidos como o da universidade PUC-Rio (e-Morh) porem buscamos um ambiente que já estavamos mais acostumados, optando então pela linguagem python e pela biblioteca de interface grafica TkInter. 
+Inicialmente começamos com a adaptação de todas as formulas que o circulo de Mohr faz para um codigo em python, visivel na sub-sessão \ref{subsec:Codigo}. Essa linguagem foi escolhida por nós pela boa performance e por ter um codigo visualmente claro, para um melhor entendimento entre os membros do grupo como um todo.
+
+Para o desenvolvimento da interface buscamos além da documentação original da biblioteca e guias em português da Universidade Federal do Rio de Janeiro (UFRJ), projetos com codigo aberto e interface semelhante a que gostariamos. Decidimos que deveriamos tambem colocar uma representação da orientação de cada tensão que o usuario inseriria para o mesmo conseguir utilizar o programa sem grandes duvidas.
+
+Ao final, precisariamos demonstrar ao usuário os resultados finais, já que essa era a função do programa. Para isso vimos que a maioria dos semelhantes apresentavam ou no próprio circulo ou em um documento no formato txt. Decidimos que essas duas opções nao eram tão claras já que um documento no formato txt em alguns sistemas operacionais são abertos em programas pouco intuitivos e no proprio circulo, no nosso caso, dificultaria a compreensão. 
+
+Optamos por, no final, apresentar os resultados em um documento no formato html que é aberto em um navegador de internet, já que quase todos os sistemas operacionais tem um como padrão, logo ao final, o usuario teria uma página de internet apresentando seus resultados de forma bem clara, com todas as variáveis bem descritas como nos exemplos de imagens já citados
 
 
+
+\label{subsec: Fórmulas}
+
+	\subsection{Fórmulas e imagens usadas}
+
+		\begin{figure}[!htb]
+			\centering
+			\includegraphics[scale = 0.4]{imagem1}
+		\end{figure}	
+
+		\begin{equation}
+			\label{sigma_x'}
+			\sigma_{x'} = \frac{\sigma_x + \sigma_y}{2} + \frac{\sigma_x - \sigma_y}{2}cos(2 \theta) + \tau_{xy}sen(2\theta)
+		\end{equation}
+
+		\begin{equation}
+			\label{tau_xy'}	
+			\tau_{x'y'} = -\frac{\sigma_x - \sigma_y}{2}sen(2 \theta) + \tau_{xy}cos(2\theta)
+		\end{equation}
+
+		\begin{equation}
+			\label{sigma_y'}
+			\sigma_{y'} = \frac{\sigma_x + \sigma_y}{2} - \frac{\sigma_x - \sigma_y}{2}cos(2 \theta) - \tau_{xy}sen(2\theta)
+		\end{equation}
+
+		\begin{equation}
+			\sigma_x + \sigma_y = \sigma_{x'} + \sigma_{y'}
+		\end{equation}
+
+		\begin{equation}
+			(\sigma_{x'} - \frac{\sigma_x + \sigma_y}{2})^2 + \tau_{x'y'}^2 = (\frac{\sigma_x - \sigma_y}{2})^2 + \tau_{xy}^2
+		\end{equation}
+
+		\begin{equation}
+			\sigma_{med} = \frac{\sigma_x + \sigma_y}{2} 
+		\end{equation}
+
+		\begin{equation}
+			R =  \sqrt{(\frac{\sigma_x - \sigma_y}{2})^2 + \tau_{xy}^2}  
+		\end{equation}
+
+		\begin{equation}
+			tg(2\theta_p) = \frac{2\tau_xy}{\sigma_x - \sigma_y}
+		\end{equation}
+
+		\begin{equation}
+			\sigma_{max} = \sigma{med} + R \therefore \sigma_{max} = \frac{\sigma_x + \sigma_y}{2} + \sqrt{(\frac{\sigma_x - \sigma_y}{2})^2 + \tau_{xy}^2}
+		\end{equation}
+
+		\begin{equation}
+			\sigma_{max} = \sigma{med} + R
+		\end{equation}
+
+		\begin{equation}
+			\tau_{max} = \sqrt{(\frac{\sigma_x - \sigma_y}{2})^2 + \tau_{xy}^2}
+		\end{equation}
+
+		\begin{equation}
+			tg(2\theta_s) = - \frac{\sigma_x - \sigma_y}{2\tau_{xy}}
+		\end{equation}
+
+		\begin{equation}
+			B = (\sigma_{x'}, \tau_{x'y'})
+		\end{equation}
+
+		\begin{equation}
+			A = (\sigma_{y'}, -\tau_{x'y'})
+		\end{equation} 
+
+
+\label{subsec: Codigo}
 
 \subsection{Codigo}
 
@@ -141,67 +223,10 @@ function run = run(self, tensao_x, tensao_y, tensao_cisalhamento, teta=0)
                                           (2.*tensao_cisalhamento))))/2.
 \end{lstlisting}
 
+\subsection{Resultados}
+Testamos o nosso programa com problemas padrões do livro texto e de listas de exercícios e vimos que o resultado era igual, (em alguns casos com mais casas de precisão numerica). Todos os casos testes tiveram resultados já esperados.
 
-\section{Formulas}
-
-\begin{equation}
-	\label{sigma_x'}
-	\sigma_{x'} = \frac{\sigma_x + \sigma_y}{2} + \frac{\sigma_x - \sigma_y}{2}cos(2 \theta) + \tau_{xy}sen(2\theta)
-\end{equation}
-
-\begin{equation}
-	\label{tau_xy'}	
-	\tau_{x'y'} = -\frac{\sigma_x - \sigma_y}{2}sen(2 \theta) + \tau_{xy}cos(2\theta)
-\end{equation}
-
-\begin{equation}
-	\label{sigma_y'}
-	\sigma_{y'} = \frac{\sigma_x + \sigma_y}{2} - \frac{\sigma_x - \sigma_y}{2}cos(2 \theta) - \tau_{xy}sen(2\theta)
-\end{equation}
-
-\begin{equation}
-	\sigma_x + \sigma_y = \sigma_{x'} + \sigma_{y'}
-\end{equation}
-
-\begin{equation}
-	(\sigma_{x'} - \frac{\sigma_x + \sigma_y}{2})^2 + \tau_{x'y'}^2 = (\frac{\sigma_x - \sigma_y}{2})^2 + \tau_{xy}^2
-\end{equation}
-
-\begin{equation}
-	\sigma_{med} = \frac{\sigma_x + \sigma_y}{2} 
-\end{equation}
-
-\begin{equation}
-	R =  \sqrt{(\frac{\sigma_x - \sigma_y}{2})^2 + \tau_{xy}^2}  
-\end{equation}
-
-\begin{equation}
-	tg(2\theta_p) = \frac{2\tau_xy}{\sigma_x - \sigma_y}
-\end{equation}
-
-\begin{equation}
-	\sigma_{max} = \sigma{med} + R \therefore \sigma_{max} = \frac{\sigma_x + \sigma_y}{2} + \sqrt{(\frac{\sigma_x - \sigma_y}{2})^2 + \tau_{xy}^2}
-\end{equation}
-
-\begin{equation}
-	\sigma_{max} = \sigma{med} + R
-\end{equation}
-
-\begin{equation}
-	\tau_{max} = \sqrt{(\frac{\sigma_x - \sigma_y}{2})^2 + \tau_{xy}^2}
-\end{equation}
-
-\begin{equation}
-	tg(2\theta_s) = - \frac{\sigma_x - \sigma_y}{2\tau_{xy}}
-\end{equation}
-
-\begin{equation}
-	B = (\sigma_{x'}, \tau_{x'y'})
-\end{equation}
-
-\begin{equation}
-	A = (\sigma_{y'}, -\tau_{x'y'})
-\end{equation}
+\section{Conclusão}
 
 
 \section{Bibliografia}
