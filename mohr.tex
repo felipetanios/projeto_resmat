@@ -1,5 +1,6 @@
 \documentclass[a4paper]{article}
 
+\bibliographystyle{plain}
 % algumas packages para arrumar as tables co a margin:
 % allows for temporary adjustment of side margins
 \usepackage{changepage}
@@ -70,6 +71,7 @@ Introduzido por  Christian Otto Mohr,  o Círculo de Mohr é uma forma gráfica 
 O circulo de Mohr foi muito usado no passado quando não existiam calculadoras eletrônicas para obter graficamente e em escala, respostas para os problemas de distribuição de Tensões, porem atualmente ele é mais usado para visualizar completamente os estados de tensão em um ponto P considerado
 
 \section{Resumo}
+Este projeto busca um metodo para o calculo computacional de um círculo de Mohr, assim como uma interface gráfica amigável ao usuario. Para isso foram usadas referencias teóricas fornecidas pelo professor, bem como outras referencias de universidades renomadas. Para a interface foi usada a biblioteca de python TKinter. Assim, foi gerado um programa com interface simples e resultados apresentados ao usuario em uma página html, para facilitar o uso de uma ferramenta tão util, intuitiva e de facil aprendizado.
 
 \section{Objetivo}
 Prover uma interface de fácil utilização que, dadas as tensões de cisalhamento e as tensões normais em um plano, exibe em um gráfico personalizado o círculo de Mohr. O programa pode ser executado em múltiplas plataformas (Windows, Linux) e gera um log em formato de página de internet com os dados calculados. 
@@ -98,7 +100,6 @@ Optamos por, no final, apresentar os resultados em um documento no formato html 
 	\subsection{Fórmulas e imagens usadas}
 
 		\begin{figure}[!htb]
-			\centering
 			\includegraphics[scale = 0.4]{imagem1}
 		\end{figure}	
 
@@ -223,6 +224,17 @@ function run = run(self, tensao_x, tensao_y, tensao_cisalhamento, teta=0)
                                           (2.*tensao_cisalhamento))))/2.
 \end{lstlisting}
 
+\subsection{Interface}
+
+	\begin{figure}[!htb]
+			\includegraphics[scale = 0.4]{interfacecirculo}
+	\end{figure}	
+		
+	\begin{figure}[!htb]
+		\includegraphics[scale = 0.4]{resultadohtml}
+	\end{figure}	
+
+
 \subsection{Resultados}
 Testamos o nosso programa com problemas padrões do livro texto e de listas de exercícios e vimos que o resultado era igual, (em alguns casos com mais casas de precisão numerica). Todos os casos testes tiveram resultados já esperados.
 
@@ -234,7 +246,25 @@ Um ponto que deve ser ressaltado para concluir esse projeto é que o círculo de
 
 \section{Bibliografia}
 
-\bibliography{mybib}
+HIBBELER, R.C., Resistência dos Materiais, Quinta Edição, Pearson, 2004.
+
+BEER, F. P.; JOHNSTON E. R. Resistência dos Materiais. 2. Ed. São Paulo: McGraw Hill,1982.
+
+LAGACE, P. A., Unified Handout Materials And Structures, disponível em $http://web.mit.edu/16.unified/www/FALL/materials/documents/HO-M-6(Mohrs)(08).pdf$, Acesso em 29 de Outubro de 2015
+
+A. P. Santos, E. O. Schaden, P. G. Rubira, T. J. Silva, O Círculo de Mohr, disponível em: $http://www.fem.unicamp.br/~assump/Projetos/2010/g9.pdf$, Acesso em 12 de Novembro de 2015
+
+Python Community, TkInter, disponível em: $https://wiki.python.org/moin/TkInter$, Acesso em 03 de Novembro de 2015.
+
+N. T. Mascia, Teoria das Tensões, disponível em: $http://www.fec.unicamp.br/~nilson/ApostilaTensao.pdf$, Acesso 29 de Outubro de 2015
+
+BRITTO, H., Curso Básico de Resistencia dos Materiais: Fascículo No 9, Estado duplo de tensão. O círculo de Mohr, disponível em: $http://www.lem.ep.usp.br/pef2301/estado_duplo.pdf$, Acesso em 29 de Outubro de 2015
+
+BUFFONI, S. S. O, Transformação de Tensão ou Análise de Tensão, disponível em: $http://www.professores.uff.br/salete/res1/aula61.pdf$, Acesso em 29 de Outubro de 2015
+
+LABAKI, J. Introdução a Python, Modulo C: TKinter, disponível em: $http://www.dcc.ufrj.br/~fabiom/mab225/tutorialtkinter.pdf$, Acesso em 03 de Novembro
+
+MARTHA, L. F.; CARBONO, A. J.; PEREIRA, A. R.; RAMIRES, F. B.; DALCANAL, P. R.; ARAUJO, R. R.; disponível em: $http://webserver2.tecgraf.puc-rio.br/etools/mohr/$, Acesso em 15 de Outubro de 2015
 
 
 \end{document}
